@@ -1,0 +1,13 @@
+{
+  "name": "node-axios-example",
+  "version": "1.0.0",
+  "description": "This is an example of using node and axios to make API requests.",
+  "scripts": {
+    "example": "node node-axios-example.js"
+  },
+  "author": "Mandy Hubbard (mandy.hubbard@shipengine.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "axios": "^0.18.0"
+  }
+}

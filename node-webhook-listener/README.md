@@ -27,6 +27,10 @@ This example application exposes endpoints to receive webhook traffic and includ
 action your application might take once the webhook is received. You should replace the sample implementation with
 the logic that meets your business needs.
 
+At a minimum, you will need to set the `API_KEY` variable at the top of the file to a valid API key for your account.
+```
+const API_KEY = 'YOUR_API_KEY';
+```
 ## Run the Application
 ```
 npm start

@@ -8,7 +8,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-const API_KEY = "NbVBCjvvzi5fMrrXRD5PAFPNRlhg68dJgOcsLJ5gEbs";
+const API_KEY = 'YOUR_API_KEY';
 
 app.post('/track', function (req, res) {
 

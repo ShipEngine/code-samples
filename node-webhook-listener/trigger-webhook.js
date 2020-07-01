@@ -8,7 +8,7 @@ const shipDate = util.getFutureDate();
 // Fill in the following variables with your own data
 const API_KEY = 'YOUR_API_KEY';
 const WAREHOUSE_ID = 'YOUR_WAREHOUSE_ID';
-const SERVICE_CODE = 'YOU_SERVICE_CODE';
+const SERVICE_CODE = 'YOUR_SERVICE_CODE';
 const CARRIER_ID = 'YOUR_CARRIER_ID';
 
 const axiosInstance = axios.create({
@@ -64,50 +64,41 @@ const processBatchPayload =
     'label_format': 'pdf'
 };
 
-axiosInstance({
+async function triggerWebhook() {
+  const createShipmentResponse = await axiosInstance({
     method: 'POST',
     url: '/v1/shipments',
     data: shipmentPayload
-})
-.then(function (response) {
-    console.log('Create shipment status: ', response.status);
-    const shipmentId = response.data.shipments[0].shipment_id;
-    console.log('shipmentId=', shipmentId);
+  });
 
-    batchPayload.shipment_ids[0] = shipmentId;
+  console.log('Create shipment status: ', createShipmentResponse.status);
 
-    axiosInstance({
-        method: 'POST',
-        url: '/v1/batches',
-        data: batchPayload
+  const shipmentId = createShipmentResponse.data.shipments[0].shipment_id;
+  console.log('shipmentId=', shipmentId);
 
-    })
-    .then((batchResponse) => {
-        console.log('Create bach status: ', batchResponse.status);
-        const batchId = batchResponse.data.batch_id;
-        console.log(`batchId=${batchId}`)
-        axiosInstance({
-            method: 'POST',
-            url: `/v1/batches/${batchId}/process/labels`,
-            data: processBatchPayload
+  batchPayload.shipment_ids[0] = shipmentId;
 
-        })
-        .then((res) => {
-         console.log('Process batch status: ', res.status);
-         console.log('Batch processed');
-        })
-        .catch((e) => {
-            console.log(`Error processing batch ${e}`);
-        });
-    })
-    .catch((e) => {
-        console.log(`Error creating batch: ${e}`);
-    });
-})
-.catch((e) => {
-    console.log(`Error creating shipment: ${e}`);
-});
+  const createBatchResponse= await axiosInstance({
+    method: 'POST',
+    url: '/v1/batches',
+    data: batchPayload
+  });
+
+  console.log('Create bach status: ', createBatchResponse.status);
+  const batchId = createBatchResponse.data.batch_id;
+  console.log(`batchId=${batchId}`)
+
+  const processBatchResponse = await axiosInstance({
+    method: 'POST',
+    url: `/v1/batches/${batchId}/process/labels`,
+    data: processBatchPayload
+  });
+
+  console.log('Process batch status: ', processBatchResponse.status);
+  console.log('Batch processed');
+
+}
 
 
-
+triggerWebhook();
 

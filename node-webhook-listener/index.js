@@ -10,12 +10,12 @@ app.use(bodyParser.json());
 
 const API_KEY = 'YOUR_API_KEY';
 
-app.post('/track', function (req, res) {
+app.post('/track', (req, res) => {
 
   let trackingNumber = req.body.data.tracking_number;
   let statusCode = req.body.data.status_code;
 
-  if(statusCode == 'DE') { // Package was delivered
+  if(statusCode === 'DE') { // Package was delivered
 
     // Use the trackingNumber to get the contact
     // info associated with this package from your backend system.
@@ -25,48 +25,51 @@ app.post('/track', function (req, res) {
   }
 });
 
-app.post('/batch', function (req, res) {
-  let batchId;
-  const resourceUrl = req.body.resource_url;
+app.post('/batch', async (req, res) => {
 
+  const resourceUrl = req.body.resource_url;
   res.sendStatus(200);
 
-  axios({
+  const resourceUrlResponse = await axios({
     method: 'get',
     url: resourceUrl,
     responseType: 'application/json',
     headers: {
       'api-key': API_KEY
     }
-  })
-  .then(function (response) {
-    const labelUrl = response.data.label_download.pdf;
-    batchId = response.data.batch_id;
-
-    axios({
-      method: 'get',
-      url: labelUrl,
-      responseType: 'stream',
-      headers: {
-        'api-key': API_KEY
-      }
-    })
-    .then((response) => {
-      const filePath = path.resolve(__dirname, 'labels', `${batchId}.pdf`)
-
-      fs.mkdir('labels', { recursive: true }, (err) => {
-        if (err) throw err;
-      });
-
-      const writer = fs.createWriteStream(filePath);
-      response.data.pipe(writer);
-    })
-    .catch((e) => {
-      console.log(e);
-    });
   });
+
+  const labelUrl = resourceUrlResponse.data.label_download.pdf;
+  const batchId = resourceUrlResponse.data.batch_id;
+
+  const labelUrlResponse = await axios({
+     method: 'get',
+     url: labelUrl,
+     responseType: 'stream',
+     headers: {
+       'api-key': API_KEY
+     }
+  });
+
+  const dir = 'labels';
+
+  try {
+    if (!fs.existsSync(path.resolve(__dirname, dir,))) {
+      fs.mkdirSync(dir)
+    }
+  } catch (err) {
+    console.error('Error creating directory: ', err)
+  }
+
+  const filePath = path.resolve(__dirname, 'labels', `${batchId}.pdf`);
+  const writer = fs.createWriteStream(filePath, { flag:'wx'});
+
+  labelUrlResponse.data.on('data', function(chunk) {
+    writer.write(chunk);
+  });
+
 });
 
-let server = app.listen(3000, function() {
+let server = app.listen(3000, () => {
   console.log('Listening on port %d', server.address().port);
 });

@@ -1,5 +1,5 @@
 {
-  "name": "node-webhook-listener",
+  "name": "node-webhook-listener-batch",
   "version": "1.0.0",
   "description": "This is a fully functional webhook listener written in NodeJS using Express.",
   "scripts": {

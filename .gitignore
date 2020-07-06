@@ -1,6 +1,7 @@
 *.idea
 *node_modules/*
 *.iml
-*node-webhook-listener/labels/*
-*node-webhook-listener/node_modules
+*node-webhook-listener-batch/labels/*
+*node-webhook-listener-batch/node_modules
+*node-webhook-listener-track/node_modules
 *.vscode

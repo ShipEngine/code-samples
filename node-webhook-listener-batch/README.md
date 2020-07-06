@@ -1,7 +1,8 @@
 ShipEngine NodeJS Webhook Listener Example
 ==========================================
-This is a fully functional webhook listener written in NodeJS using Express. It currently provides sample endpoints for
-`batch` and `track` events.
+This is a fully functional webhook listener written in NodeJS using Express. It provides a sample implementation for
+listening for `batch` events.
+
 
 ## Pre-Requisites
 1. Install [NodeJS](https://nodejs.org) per the site's instructions. Likewise, you can use other package managers,
@@ -17,13 +18,13 @@ git clone git@github.com:ShipEngine/code-samples.git
 
 Install dependencies:
 ```
-cd code-samples/node-webhook-listener
+cd code-samples/node-webhook-listener-batch
 npm install
 
 ```
 
 ## Implementation
-This example application exposes endpoints to receive webhook traffic and includes a sample implementation of what
+This example application exposes an endpoint to receive webhook traffic and includes a sample implementation of what
 action your application might take once the webhook is received. You should replace the sample implementation with
 the logic that meets your business needs.
 

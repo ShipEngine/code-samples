@@ -1,0 +1,26 @@
+{
+  "name": "node-webhook-listener-batch",
+  "version": "1.0.0",
+  "description": "This is a fully functional webhook listener written in NodeJS using Express.",
+  "scripts": {
+    "start": "node index.js",
+    "trigger": "node trigger-webhook.js"
+  },
+  "author": {
+    "name": "ShipEngine",
+    "email": "support@shipengine.com",
+    "url": "https://www.shipengine.com"
+  },
+  "homepage": "https://www.shipengine.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ShipEngine/code-samples.git"
+  },
+  "license": "UNLICENSED",
+  "main": "index.js",
+  "dependencies": {
+    "express": "4.17.1",
+    "axios": "0.19.2",
+    "body-parser": "1.19.0"
+  }
+}

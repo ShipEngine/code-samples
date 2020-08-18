@@ -1,0 +1,25 @@
+{
+  "name": "node-axios-with-rety",
+  "version": "1.0.0",
+  "description": "This is an example of handling 429 errors using the retry-axios package.",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": {
+    "name": "ShipEngine",
+    "email": "support@shipengine.com",
+    "url": "https://www.shipengine.com"
+  },
+  "homepage": "https://www.shipengine.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ShipEngine/code-samples.git"
+  },
+  "license": "UNLICENSED",
+  "main": "index.js",
+  "dependencies": {
+    "express": "4.17.1",
+    "axios": "0.19.2",
+    "body-parser": "1.19.0"
+  }
+}

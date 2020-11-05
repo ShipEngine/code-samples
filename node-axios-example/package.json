@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "This is an example of using node and axios to make API requests.",
   "scripts": {
-    "example": "node node-axios-example.js"
+    "example": "node index.js"
   },
   "author": "Mandy Hubbard (mandy.hubbard@shipengine.com)",
   "license": "ISC",

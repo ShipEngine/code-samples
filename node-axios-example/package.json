@@ -8,6 +8,6 @@
   "author": "Mandy Hubbard (mandy.hubbard@shipengine.com)",
   "license": "ISC",
   "devDependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.1"
   }
 }

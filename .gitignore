@@ -1,6 +1,7 @@
 *.idea
 *node_modules/*
 *.iml
+*node-axios-example/node_modules
 *node-webhook-listener-batch/labels/*
 *node-webhook-listener-batch/node_modules
 *node-webhook-listener-track/node_modules
@@ -9,3 +10,4 @@
 */node_modules
 *node-axios-manifest/node_modules
 node-axios-manifest/manifests
+

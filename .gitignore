@@ -7,4 +7,5 @@
 *.vscode
 *node-axios-with-retry/node_modules
 */node_modules
-*node-axios-manifest/*
+*node-axios-manifest/node_modules
+node-axios-manifest/manifests
